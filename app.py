@@ -18,12 +18,19 @@ def load_css():
 # Apply custom styling
 load_css()
 
-# Load models
-with open('saved_models/Diabetes_trained_model.sav', 'rb') as f:
+# Load models and scalers
+# Load models and scalers
+with open('models/diabetes_model.pkl', 'rb') as f:
     diabetes_model = pickle.load(f)
 
-with open('saved_models/Heart_disease_trained_model.sav', 'rb') as f:
+with open('models/diabetes_scaler.pkl', 'rb') as f:
+    diabetes_scaler = pickle.load(f)
+
+with open('models/heart_model.pkl', 'rb') as f:
     heart_model = pickle.load(f)
+
+with open('models/heart_scaler.pkl', 'rb') as f:
+    heart_scaler = pickle.load(f)
     
 # sidebar for navigate
 
@@ -75,7 +82,12 @@ if (selected =='Diabetes Prediction'):
                    SkinThickness, Insulin, BMI_value,
                      DiabetesPedigreeFunction, Age ]
         try:
-            diabetes_prediction = diabetes_model.predict([inputs])
+            # Convert to float
+            inputs_float = [float(x) for x in inputs]
+            # Scale the inputs
+            inputs_scaled = diabetes_scaler.transform([inputs_float])
+            # Make prediction
+            diabetes_prediction = diabetes_model.predict(inputs_scaled)
             if (diabetes_prediction[0] == 1):
                 diabetes_diagnosis = 'The person is diabetic'
             else:
@@ -136,7 +148,12 @@ if (selected =='Heart Disease Prediction'):
                    thalach, exang, oldpeak, slope, ca, thal]
 
         try:
-            heart_prediction = heart_model.predict([inputs])
+            # Convert to float
+            inputs_float = [float(x) for x in inputs]
+            # Scale the inputs
+            inputs_scaled = heart_scaler.transform([inputs_float])
+            # Make prediction
+            heart_prediction = heart_model.predict(inputs_scaled)
             if (heart_prediction[0] == 1):
                 heart_diagnosis = 'The person has heart disease'
             else:
