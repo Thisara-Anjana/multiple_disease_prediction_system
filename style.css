@@ -1,0 +1,86 @@
+/* Simple CSS for Multiple Disease Prediction System */
+
+/* Main background color */
+.stApp {
+    background-color: #f0f4f8;
+}
+
+/* Sidebar - blue background */
+[data-testid="stSidebar"] {
+    background-color: #1e40af;
+}
+
+/* Sidebar text - white color */
+[data-testid="stSidebar"] * {
+    color: white !important;
+}
+
+/* Main content area - white box */
+.main .block-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    margin: 2rem auto;
+}
+
+/* Title styling */
+h1 {
+    color: #1e293b !important;
+    text-align: center;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #3b82f6;
+}
+
+/* Input field labels */
+.stTextInput>label {
+    color: #1e293b !important;
+    font-weight: bold !important;
+}
+
+/* Input fields */
+.stTextInput>div>div>input {
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+/* Button styling */
+.stButton>button {
+    background-color: #2563eb;
+    color: white;
+    border-radius: 8px;
+    padding: 14px 32px;
+    width: 100%;
+}
+
+/* Button hover effect */
+.stButton>button:hover {
+    background-color: #1d4ed8;
+}
+
+/* Success message - green */
+.element-container .stSuccess {
+    background-color: #f0fdf4;
+    border-left: 6px solid #22c55e;
+    padding: 1rem;
+}
+
+/* Error message - red */
+.element-container .stError {
+    background-color: #fef2f2;
+    border-left: 6px solid #ef4444;
+    padding: 1rem;
+}
+
+/* Hide Streamlit branding */
+#MainMenu {
+    visibility: hidden;
+}
+
+footer {
+    visibility: hidden;
+}
+
+header {
+    visibility: hidden;
+}

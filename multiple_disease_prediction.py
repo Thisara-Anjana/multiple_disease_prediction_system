@@ -10,7 +10,13 @@ import pickle
 import streamlit as st
 from streamlit_option_menu import option_menu
 
+# Load custom CSS
+def load_css():
+    with open('style.css') as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
+# Apply custom styling
+load_css()
 
 # Load models
 with open('saved_models/Diabetes_trained_model.sav', 'rb') as f:
