@@ -21,6 +21,8 @@
     padding: 2rem;
     border-radius: 10px;
     margin: 2rem auto;
+    color: #1e293b;
+    /* Set default text color for container */
 }
 
 /* Title styling */
@@ -31,31 +33,66 @@ h1 {
     border-bottom: 3px solid #3b82f6;
 }
 
-/* Input field labels */
-.stTextInput>label {
+/* Force dark text for all labels and inputs */
+label,
+.stmarkdown,
+p,
+span {
+    color: #1e293b !important;
+}
+
+/* Specifically target Streamlit widget labels */
+.stTextInput>label,
+.stNumberInput>label,
+.stSelectbox>label {
     color: #1e293b !important;
     font-weight: bold !important;
 }
 
-/* Input fields */
-.stTextInput>div>div>input {
-    border: 2px solid #cbd5e1;
-    border-radius: 8px;
-    padding: 12px;
+/* Fix input field text color and background */
+input {
+    color: #1e293b !important;
+    background-color: white !important;
+}
+
+/* Fix number input background */
+div[data-baseweb="input"]>div {
+    background-color: white !important;
+    color: #1e293b !important;
+}
+
+/* Fix selectbox text color and background */
+div[data-baseweb="select"]>div {
+    background-color: white !important;
+    color: #1e293b !important;
+}
+
+/* Fix dropdown menu items background */
+div[data-baseweb="popover"]>div,
+div[data-baseweb="menu"] {
+    background-color: white !important;
+}
+
+/* Fix dropdown option text color */
+div[data-baseweb="menu"] li span {
+    color: #1e293b !important;
 }
 
 /* Button styling */
 .stButton>button {
     background-color: #2563eb;
-    color: white;
+    color: white !important;
+    /* Ensure button text is white */
     border-radius: 8px;
     padding: 14px 32px;
     width: 100%;
+    border: none;
 }
 
 /* Button hover effect */
 .stButton>button:hover {
     background-color: #1d4ed8;
+    color: white !important;
 }
 
 /* Success message - green */
@@ -63,6 +100,7 @@ h1 {
     background-color: #f0fdf4;
     border-left: 6px solid #22c55e;
     padding: 1rem;
+    color: #15803d !important;
 }
 
 /* Error message - red */
@@ -70,6 +108,7 @@ h1 {
     background-color: #fef2f2;
     border-left: 6px solid #ef4444;
     padding: 1rem;
+    color: #b91c1c !important;
 }
 
 /* Hide Streamlit branding */

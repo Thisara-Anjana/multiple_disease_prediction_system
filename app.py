@@ -54,26 +54,24 @@ if (selected =='Diabetes Prediction'):
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        Pregnancies = st.text_input('Number of Pregnancies')
+        Pregnancies = st.number_input('Number of Pregnancies', min_value=0, step=1)
     with col2:
-        Glucose = st.text_input('Glucose Level')
+        Glucose = st.number_input('Glucose Level', min_value=0.0)
     with col3:
-        BloodPressure = st.text_input('Blood Pressure value')
+        BloodPressure = st.number_input('Blood Pressure value', min_value=0.0)
     with col1:
-        SkinThickness = st.text_input('Skin Thickness value')
+        SkinThickness = st.number_input('Skin Thickness value', min_value=0.0)
     with col2:
-        Insulin = st.text_input('Insulin Level')
+        Insulin = st.number_input('Insulin Level', min_value=0.0)
     with col3:
-        BMI_value = st.text_input('BMI value')
+        BMI_value = st.number_input('BMI value', min_value=0.0)
     with col1:
-        DiabetesPedigreeFunction = st.text_input('Diabetes Pedigree Function value')
+        DiabetesPedigreeFunction = st.number_input('Diabetes Pedigree Function value', min_value=0.0, format="%.3f")
     with col2:
-        Age = st.text_input('Age of the Person')
+        Age = st.number_input('Age of the Person', min_value=0, step=1)
 
 
     # for prediction
-
-    diabetes_diagnosis = ''
 
     #predict button is clicked
     if st.button('Diabetes Test Result'):
@@ -81,21 +79,16 @@ if (selected =='Diabetes Prediction'):
         inputs = [ Pregnancies, Glucose, BloodPressure,
                    SkinThickness, Insulin, BMI_value,
                      DiabetesPedigreeFunction, Age ]
-        try:
-            # Convert to float
-            inputs_float = [float(x) for x in inputs]
-            # Scale the inputs
-            inputs_scaled = diabetes_scaler.transform([inputs_float])
-            # Make prediction
-            diabetes_prediction = diabetes_model.predict(inputs_scaled)
-            if (diabetes_prediction[0] == 1):
-                diabetes_diagnosis = 'The person is diabetic'
-            else:
-                diabetes_diagnosis = 'The person is not diabetic'
-        except ValueError:
-            diabetes_diagnosis = 'Please enter valid input values'
-
-    st.success(diabetes_diagnosis)
+        
+        # Scale the inputs
+        inputs_scaled = diabetes_scaler.transform([inputs])
+        # Make prediction
+        diabetes_prediction = diabetes_model.predict(inputs_scaled)
+        
+        if (diabetes_prediction[0] == 1):
+            st.error('The person is diabetic')
+        else:
+            st.success('The person is not diabetic')
 
 #------------------------------------------------------
 
@@ -111,34 +104,37 @@ if (selected =='Heart Disease Prediction'):
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        age = st.text_input('Age of the Person')
+        age = st.number_input('Age of the Person', min_value=0, step=1)
     with col2:
-        sex = st.text_input('Sex of the Person (0 = Female, 1 = Male)')
+        sex = st.selectbox('Sex of the Person', options=[0, 1], format_func=lambda x: 'Female' if x == 0 else 'Male')
     with col3:
-        cp = st.text_input('Chest Pain types (0-3)')
+        cp = st.selectbox('Chest Pain types', options=[0, 1, 2, 3], 
+                          format_func=lambda x: ['Typical Angina', 'Atypical Angina', 'Non-anginal Pain', 'Asymptomatic'][x])
     with col1:
-        trestbps = st.text_input('Resting Blood Pressure value')
+        trestbps = st.number_input('Resting Blood Pressure value', min_value=0.0)
     with col2:      
-        chol = st.text_input('Serum Cholestoral in mg/dl')
+        chol = st.number_input('Serum Cholestoral in mg/dl', min_value=0.0)
     with col3:  
-        fbs = st.text_input('Fasting Blood Sugar > 120 mg/dl (1 = True; 0 = False)')
+        fbs = st.selectbox('Fasting Blood Sugar > 120 mg/dl', options=[0, 1], format_func=lambda x: 'False' if x == 0 else 'True')
     with col1:
-        restecg = st.text_input('Resting Electrocardiographic results (0-2)')
+        restecg = st.selectbox('Resting Electrocardiographic results', options=[0, 1, 2],
+                               format_func=lambda x: ['Normal', 'ST-T wave abnormality', 'Left ventricular hypertrophy'][x])
     with col2:
-        thalach = st.text_input('Maximum Heart Rate achieved')     
+        thalach = st.number_input('Maximum Heart Rate achieved', min_value=0.0)     
     with col3: 
-        exang = st.text_input('Exercise Induced Angina (1 = Yes; 0 = No)')
+        exang = st.selectbox('Exercise Induced Angina', options=[0, 1], format_func=lambda x: 'No' if x == 0 else 'Yes')
     with col1:
-        oldpeak = st.text_input('ST depression induced by exercise relative to rest')
+        oldpeak = st.number_input('ST depression induced by exercise relative to rest', min_value=0.0)
     with col2:
-        slope = st.text_input('Slope of the peak exercise ST segment (0-2)')
+        slope = st.selectbox('Slope of the peak exercise ST segment', options=[0, 1, 2],
+                             format_func=lambda x: ['Upsloping', 'Flat', 'Downsloping'][x])
     with col3:
-        ca = st.text_input('Number of major vessels (0-3) colored by fluoroscopy')
+        ca = st.selectbox('Number of major vessels colored by fluoroscopy', options=[0, 1, 2, 3])
     with col1:
-        thal = st.text_input('Thalassemia (1 = Normal; 2 = Reversible Defect; 3 = Fixed Defect)')
+        thal = st.selectbox('Thalassemia', options=[1, 2, 3],
+                            format_func=lambda x: {1: 'Normal', 2: 'Fixed Defect', 3: 'Reversible Defect'}[x])
     
     # for prediction
-    heart_diagnosis = ''
 
     #predict button is clicked
     if st.button('Heart Disease Test Result'):
@@ -147,18 +143,12 @@ if (selected =='Heart Disease Prediction'):
         inputs = [age, sex, cp, trestbps, chol, fbs, restecg,
                    thalach, exang, oldpeak, slope, ca, thal]
 
-        try:
-            # Convert to float
-            inputs_float = [float(x) for x in inputs]
-            # Scale the inputs
-            inputs_scaled = heart_scaler.transform([inputs_float])
-            # Make prediction
-            heart_prediction = heart_model.predict(inputs_scaled)
-            if (heart_prediction[0] == 1):
-                heart_diagnosis = 'The person has heart disease'
-            else:
-                heart_diagnosis = 'The person does not have heart disease'
-        except ValueError:
-            heart_diagnosis = 'Please enter valid input values'
-
-    st.success(heart_diagnosis)
+        # Scale the inputs
+        inputs_scaled = heart_scaler.transform([inputs])
+        # Make prediction
+        heart_prediction = heart_model.predict(inputs_scaled)
+        
+        if (heart_prediction[0] == 1):
+            st.error('The person has heart disease')
+        else:
+            st.success('The person does not have heart disease')
