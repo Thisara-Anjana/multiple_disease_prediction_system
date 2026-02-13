@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Prediction AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="background-animation"></div>
+
+    <div class="container">
+        <header>
+            <h1>Health AI Predictor</h1>
+            <p>Advanced Disease Detection System</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" onclick="switchTab('diabetes')">Diabetes</button>
+            <button class="tab-btn" onclick="switchTab('heart')">Heart Disease</button>
+        </nav>
+
+        <!-- Diabetes Form -->
+        <section id="diabetes-form" class="form-section active">
+            <h2>Diabetes Assessment</h2>
+            <form onsubmit="predictDiabetes(event)">
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label>Pregnancies</label>
+                        <input type="number" id="d-pregnancies" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label>Glucose Level</label>
+                        <input type="number" id="d-glucose" required min="0" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label>Blood Pressure</label>
+                        <input type="number" id="d-bp" required min="0" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label>Skin Thickness</label>
+                        <input type="number" id="d-skin" required min="0" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label>Insulin Level</label>
+                        <input type="number" id="d-insulin" required min="0" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label>BMI</label>
+                        <input type="number" id="d-bmi" required min="0" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label>Diabetes Pedigree Function</label>
+                        <input type="number" id="d-dpf" required min="0" step="0.001">
+                    </div>
+                    <div class="input-group">
+                        <label>Age</label>
+                        <input type="number" id="d-age" required min="0">
+                    </div>
+                </div>
+                <button type="submit" class="predict-btn">Analyze Risk</button>
+            </form>
+            <div id="diabetes-result" class="result-box"></div>
+        </section>
+
+        <!-- Heart Disease Form -->
+        <section id="heart-form" class="form-section">
+            <h2>Heart Health Assessment</h2>
+            <form onsubmit="predictHeart(event)">
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label>Age</label>
+                        <input type="number" id="h-age" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label>Sex</label>
+                        <select id="h-sex">
+                            <option value="1">Male</option>
+                            <option value="0">Female</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Chest Pain Type</label>
+                        <select id="h-cp">
+                            <option value="0">Typical Angina</option>
+                            <option value="1">Atypical Angina</option>
+                            <option value="2">Non-anginal Pain</option>
+                            <option value="3">Asymptomatic</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Resting BP</label>
+                        <input type="number" id="h-trestbps" required min="0" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label>Cholesterol</label>
+                        <input type="number" id="h-chol" required min="0" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label>Fasting BS > 120 mg/dl</label>
+                        <select id="h-fbs">
+                            <option value="0">False</option>
+                            <option value="1">True</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Resting ECG</label>
+                        <select id="h-restecg">
+                            <option value="0">Normal</option>
+                            <option value="1">ST-T Wave Abnormality</option>
+                            <option value="2">Left Ventricular Hypertrophy</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Max Heart Rate</label>
+                        <input type="number" id="h-thalach" required min="0" step="0.1">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Exercise Induced Angina</label>
+                        <select id="h-exang">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>ST Depression</label>
+                        <input type="number" id="h-oldpeak" required min="0" step="0.1">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Slope</label>
+                        <select id="h-slope">
+                            <option value="0">Upsloping</option>
+                            <option value="1">Flat</option>
+                            <option value="2">Downsloping</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Major Vessels (0-3)</label>
+                        <select id="h-ca">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                     <div class="input-group">
+                        <label>Thalassemia</label>
+                        <select id="h-thal">
+                            <option value="1">Normal</option>
+                            <option value="2">Fixed Defect</option>
+                            <option value="3">Reversible Defect</option>
+                        </select>
+                    </div>
+
+                </div>
+                <button type="submit" class="predict-btn">Analyze Heart Health</button>
+            </form>
+            <div id="heart-result" class="result-box"></div>
+        </section>
+
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

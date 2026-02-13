@@ -1,2 +1,5 @@
 .conda
-
+__pycache__/
+*.pyc
+venv/
+.env

@@ -1,8 +1,10 @@
-streamlit
-streamlit-option-menu
-scikit-learn==1.5.0
+fastapi
+uvicorn
+pydantic
+scikit-learn
 numpy
 pandas
 xgboost
 matplotlib
 seaborn
+requests
