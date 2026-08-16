@@ -1,6 +1,6 @@
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://multiple-disease-prediction-system-1-uwes.onrender.com";
 
-function switchTab(tab) {
+function switchTab(event, tab) {
     // Buttons
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     event.target.classList.add('active');
