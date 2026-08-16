@@ -1,0 +1,44 @@
+# VCS
+.git
+.gitignore
+
+# Local Python environments and caches
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Tooling caches and test artifacts
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Build and packaging
+build/
+dist/
+*.egg-info/
+
+# Editor/OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+Thumbs.db
+.DS_Store
+
+# Logs and local outputs
+*.log
+
+# Data science/dev-only folders (not required by backend runtime)
+notebooks/
+test_purpose/
+data/
+
+# Keep trained model binaries, skip generated plot images
+models/plots/
